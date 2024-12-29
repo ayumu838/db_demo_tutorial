@@ -1,0 +1,19 @@
+services:
+  db:
+    build: ./mysql/
+    volumes:
+      - ./mysql/db:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: demo_user
+      MYSQL_ROOT_PASSWORD: rootpassword
+  app:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    environment:
+      SECRET_KEY_BASE: dummy
+    volumes:
+      - .:/app
+    ports:
+      - "3201:3000"
+    depends_on:
+      - db
