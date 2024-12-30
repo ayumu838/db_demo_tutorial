@@ -5,7 +5,7 @@ ARG RUBY_VERSION=3.4.1
 FROM docker.io/library/ruby:$RUBY_VERSION-slim
 
 RUN apt-get update -qq \
-&& apt-get install -y mariadb-server npm \
+&& apt-get install -y mariadb-server libmariadb-dev npm \
 && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
