@@ -1,24 +1,37 @@
-# README
+# 初期設定
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## 環境構築
 
-Things you may want to cover:
+railsとmysqlをdocker composeで構築します
 
-* Ruby version
+```bash
+docker compose build # Dockerイメージのビルド
+```
 
-* System dependencies
+## DBのセットアップ
+はじめにデータベースのセットアップが必要が必要になります
+スキーマ管理は ridgepole を使用しています
 
-* Configuration
+```bash
+docker compose up -d # docker-compose.yml に記載されているコンテナを起動
+docker compose exec app bundle exec rails db:create # データベースの作成
+docker compose exec app bundle exec ridgepole --config config/database.yml --file db/Schemafile --apply # マイグレーションの実行
+```
 
-* Database creation
+## seedデータの投入
+seedデータを投入します
+seedデータは `db/seeds.rb` に記載されており、fakerを使用してランダムなデータを生成しています
+DBパフォーマンスを見るためにある程度のデータが必要なため、seedのインポートにはそれなりに時間がかかります
 
-* Database initialization
+```bash
+docker compose exec app bundle rails db:seed
+```
 
-* How to run the test suite
+# TIPS
+## スーキマの変更
+スキーマの変更を行う場合は `db/Schemafile` を変更してください
+変更後は以下のコマンドでマイグレーションを実行してください
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```bash
+docker compose exec app bundle exec ridgepole --config config/database.yml --file db/Schemafile --apply
+```
