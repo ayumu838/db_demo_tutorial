@@ -6,3 +6,44 @@ create_table "companies", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", f
   t.datetime "created_at", null: false
   t.datetime "updated_at", null: false
 end
+
+create_table "members", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  t.string "name", null: false
+  t.string "email_address", null: false
+  t.date "birthday", null: false
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+end
+
+create_table "entries", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  t.bigint "work_id", null: false
+  t.bigint "member_id", null: false
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+  t.index [ "work_id" ], name: "fk_entries_works"
+  t.index [ "member_id" ], name: "fk_entries_members"
+end
+
+create_table "shops", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  t.bigint "company_id", null: false
+  t.string "name", null: false
+  t.text "description", null: false
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+  t.index [ "company_id" ], name: "fk_shops_companies"
+end
+
+create_table "works", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  t.bigint "shop_id", null: false
+  t.string "name", null: false
+  t.text "description", null: false
+  t.integer "salary", null: false
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+  t.index [ "shop_id" ], name: "fk_works_shops"
+end
+
+add_foreign_key "entries", "members"
+add_foreign_key "entries", "works"
+add_foreign_key "shops", "companies"
+add_foreign_key "works", "shops"
