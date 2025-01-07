@@ -35,3 +35,19 @@ docker compose exec app bundle rails db:seed
 ```bash
 docker compose exec app bundle exec ridgepole --config config/database.yml --file db/Schemafile --apply
 ```
+
+## DBに直接接続する場合
+
+以下の情報で接続できます
+
+- host: localhost
+- port: 3306
+- user: root
+- password: password
+- database: demo_db
+
+コンソールから接続する場合
+
+```bash
+docker compose exec db mysql -u root -ppassword demo_user -d demo_db
+```
