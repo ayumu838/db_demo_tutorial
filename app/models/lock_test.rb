@@ -1,0 +1,2 @@
+class LockTest < ApplicationRecord
+end
