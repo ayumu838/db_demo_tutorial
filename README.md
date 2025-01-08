@@ -43,11 +43,18 @@ docker compose exec app bundle exec ridgepole --config config/database.yml --fil
 - host: localhost
 - port: 3306
 - user: root
-- password: password
-- database: demo_db
+- password: rootpassword
+- database: demo_dbdb_demo_tutorial_development
 
 コンソールから接続する場合
 
 ```bash
-docker compose exec db mysql -u root -ppassword demo_user -d demo_db
+docker compose exec app mysql -h db -u root -D db_demo_tutorial_development -p
+```
+
+## ロック状況を確認する方法
+以下で見れる
+最低限欲しい情報だけ抜き出しているので、必要に応じてカラムを増やすといい
+```
+select object_name, partition_name, index_name, lock_mode, lock_type, lock_data from performance_schema.data_locks;
 ```
