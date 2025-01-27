@@ -68,3 +68,12 @@ end
     puts("Entry: #{i + 1}/#{(BASE_RECORD_NUM * 5)/BATCH_SIZE} completed.")
   end
 end
+
+
+10.times do |i|
+  LockTest.transaction do
+    LockTest.create(
+      name: Faker::Name.name
+    )
+  end
+end
