@@ -24,11 +24,11 @@ seedデータは `db/seeds.rb` に記載されており、fakerを使用して�
 DBパフォーマンスを見るためにある程度のデータが必要なため、seedのインポートにはそれなりに時間がかかります
 
 ```bash
-docker compose exec app bundle rails db:seed
+docker compose exec app bundle exec rails db:seed
 ```
 
 # TIPS
-## スーキマの変更
+## スキーマの変更
 スキーマの変更を行う場合は `db/Schemafile` を変更してください
 変更後は以下のコマンドでマイグレーションを実行してください
 
