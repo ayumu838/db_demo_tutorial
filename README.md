@@ -55,6 +55,6 @@ docker compose exec app mysql -h db -u root -D db_demo_tutorial_development -p
 ## ロック状況を確認する方法
 以下で見れる
 最低限欲しい情報だけ抜き出しているので、必要に応じてカラムを増やすといい
-```
-select object_name, partition_name, index_name, lock_mode, lock_type, lock_data from performance_schema.data_locks;
+```sql
+SELECT engine_transaction_id, lock_status, object_name, partition_name, index_name, lock_mode, lock_type, lock_data FROM performance_schema.data_locks;
 ```
