@@ -70,9 +70,10 @@ end
 end
 
 
-10.times do |i|
+5.times do |i|
   LockTest.transaction do
     LockTest.create(
+      id: i * 2 + 1,
       name: Faker::Name.name
     )
   end
