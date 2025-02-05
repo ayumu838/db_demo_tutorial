@@ -21,7 +21,8 @@
 1. 実行計画を見て、計画内容を記録する
   - 実行計画: `EXPLAIN` を先頭につけると実行計画を見ることができます
 1. `shops.name` にインデックスを張って、実行計画の変化を確認する
-  - インデックスの張り方: `Schemafile` にインデックスを張る下記のコードを追記する
-    - `t.index [ "name" ], name: "shops_name"` 
-
-
+  - インデックスの張り方
+    - `Schemafile` にインデックスを張る下記のコードを追記する
+      - `t.index [ "name" ], name: "shops_name"` 
+    - ridgepole を実行して、インデックスを張る
+      - `docker compose exec app bundle exec ridgepole --config config/database.yml --file db/Schemafile --apply`
