@@ -15,29 +15,28 @@ SELECT engine_transaction_id, lock_status, object_name, partition_name, index_na
 BEGIN;
 SELECT * FROM lock_tests WHERE id = 1 FOR UPDATE;
 
--- ここでターミナル2に移動
-
+-- ここでターミナル2に移動 ①
+-- ②
 SELECT * FROM lock_tests WHERE id >= 9 FOR UPDATE;
--- ここでターミナル2に移動
-
-SELECT * FROM lock_tests WHERE id >= 9 FOR UPDATE;
--- ここでターミナル2に移動
-
+-- ここでターミナル2に移動 ③
+-- ④
 ROLLBACK;
 ```
 
 ターミナル2
 
 ```sql
+-- ①
 BEGIN;
 UPDATE lock_tests SET name = 'after' WHERE id = 1; -- 処理が終わらないはず
 -- Ctrl + C で終了
+-- ターミナル1へ戻る ②
+-- ③
 INSERT INTO lock_tests (id, name) VALUES (12, 'test'); -- 処理が完了しないはず
--- ターミナル1へ戻る
--- 処理が進みINSERTが完了する
+-- Ctrl + C で終了
 
 INSERT INTO lock_tests (name) VALUES ('test'); -- 最後のレコードである9以上のため、末尾に追加ができず処理が完了しないはず
--- ターミナル1へ戻る
+-- ターミナル1へ戻る ④
 
 ROLLBACK;
 ```
