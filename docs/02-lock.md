@@ -20,6 +20,9 @@ SELECT * FROM lock_tests WHERE id = 1 FOR UPDATE;
 SELECT * FROM lock_tests WHERE id >= 9 FOR UPDATE;
 -- ここでターミナル2に移動
 
+SELECT * FROM lock_tests WHERE id >= 9 FOR UPDATE;
+-- ここでターミナル2に移動
+
 ROLLBACK;
 ```
 
