@@ -29,7 +29,7 @@ ROLLBACK;
 BEGIN;
 UPDATE lock_tests SET name = 'after' WHERE id = 1; -- 処理が終わらないはず
 -- Ctrl + C で終了
-INSERT INTO lock_tests (id, name) VALUES (2, 'test'); -- 処理が完了しないはず
+INSERT INTO lock_tests (id, name) VALUES (12, 'test'); -- 処理が完了しないはず
 -- ターミナル1へ戻る
 -- 処理が進みINSERTが完了する
 
